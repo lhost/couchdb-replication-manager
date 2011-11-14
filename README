@@ -1,0 +1,29 @@
+This tool can be used to build CouchDB cluster. Replication in your cluster is
+described by 'rep-schema' documents stored in CouchDB database
+'replication-manager'. Database 'replication-manager' is replicated to all
+nodes and couchdb-replication-manager.pl is running on every node of this
+cluster. couchdb-replication-manager.pl read document with ID
+<ID-of-your-rep-schema-document> from CouchDB and manages jobs related to local
+node.
+
+Create configuration file '/etc/couchdb/couchdb-replication-manager.ini' with the following content:
+
+	[couchdb]
+	server = localhost
+	database = replication-manager
+	username = your-couchdb-admin
+	password = your-couchdn-password
+
+	[replicator]
+	schema = my-CouchDB-replication
+
+
+You should start this tool from init by adding the following line into your /etc/initttab:
+
+	# CouchDB replication manager:
+	cm:2345:respawn:/usr/bin/sudo -u couchdb /etc/couchdb/replication-manager/couchdb-replication-manager-wrapper.sh
+
+
+
+Enjoy and relax! :)
+
