@@ -1,0 +1,38 @@
+// save this document into replication-manager database on your first CouchDB node
+{
+   "_id": "his-CouchDB-replication", //required
+   "type": "rep-schema", //required
+   "nodes": [
+       {
+           "name": "mini",
+           "server": "mini.hostname.lh"
+       },
+       {
+           "name": "midi",
+           "server": "midi.hostname.lh"
+       },
+       {
+           "name": "maxi",
+           "server": "maxi.hostname.lh"
+       }
+   ],
+   "replication": {
+       "databases": [
+           "replication-manager",
+           "_users",
+           "pages",
+       ],
+       "links": [
+           [
+               "midi",
+               "mini",
+               "both"
+           ],
+           [
+               "maxi",
+               "mini",
+               "both"
+           ]
+       ]
+   }
+}
